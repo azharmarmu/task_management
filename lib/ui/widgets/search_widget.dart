@@ -13,33 +13,36 @@ class Searchwidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        fillColor: AppColors.secondaryColor,
-        filled: true,
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(AppSize.defaultSize / 2),
-        ),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppSize.defaultSize,
-          vertical: AppSize.defaultSize / 2,
-        ),
-        label: const Text(AppStrings.search),
-        suffixIcon: Container(
-          padding: const EdgeInsets.all(AppSize.defaultSize * 0.75),
-          margin: const EdgeInsets.symmetric(
+    return SizedBox(
+      height: AppSize.textBoxSize,
+      child: TextField(
+        decoration: InputDecoration(
+          fillColor: AppColors.secondaryColor,
+          filled: true,
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(AppSize.defaultSize / 2),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
             horizontal: AppSize.defaultSize,
             vertical: AppSize.defaultSize / 2,
           ),
-          decoration: BoxDecoration(
-            color: AppColors.primaryColor,
-            borderRadius: BorderRadius.circular(AppSize.defaultSize * 0.75),
-          ),
-          child: SvgPicture.asset(
-            AppAssets.search,
-            width: AppSize.defaultIconSize * 0.75,
-            height: AppSize.defaultIconSize * 0.75,
+          hintText: AppStrings.search,
+          suffixIcon: Container(
+            padding: const EdgeInsets.all(AppSize.defaultSize * 0.7),
+            margin: const EdgeInsets.symmetric(
+              horizontal: AppSize.defaultSize,
+              vertical: AppSize.defaultSize / 2,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor,
+              borderRadius: BorderRadius.circular(AppSize.defaultSize * 0.75),
+            ),
+            child: SvgPicture.asset(
+              AppAssets.search,
+              width: AppSize.defaultIconSize * 0.7,
+              height: AppSize.defaultIconSize * 0.7,
+            ),
           ),
         ),
       ),

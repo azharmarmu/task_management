@@ -13,4 +13,9 @@ class AppAssets {
   static const profileMenu = 'assets/icons/menu_profile.svg';
 
   static const search = 'assets/icons/Search.svg';
+
+  static const docStorageFile = 'assets/icons/Documents.svg';
+  static const mediaStorageFile = 'assets/icons/media.svg';
+  static const otherStorageFile = 'assets/icons/unknown.svg';
+  static const unknownStorageFile = 'assets/icons/unknown.svg';
 }

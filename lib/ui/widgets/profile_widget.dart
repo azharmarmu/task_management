@@ -13,8 +13,8 @@ class ProfileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: AppSize.textBoxSize,
       padding: const EdgeInsets.symmetric(
-        vertical: AppSize.defaultSize / 2,
         horizontal: AppSize.defaultSize,
       ),
       decoration: BoxDecoration(

@@ -20,12 +20,14 @@ class MainWidget extends StatelessWidget {
         horizontal: AppSize.defaultSize,
         vertical: AppSize.defaultSize,
       ),
-      child: Column(
-        children: [
-          MyAppBar(),
-          SizedBox(height: AppSize.defaultSize),
-          BodySection(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            MyAppBar(),
+            SizedBox(height: AppSize.defaultSize),
+            BodySection(),
+          ],
+        ),
       ),
     );
   }

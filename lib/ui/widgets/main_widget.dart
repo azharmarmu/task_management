@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/ui/widgets/profile_widget.dart';
-import 'package:task_management/ui/widgets/search_widget.dart';
 
 import '../../utilities/app_size.dart';
-import '../../utilities/app_strings.dart';
 import 'body_section.dart';
 import 'my_app_bar.dart';
 
@@ -20,7 +17,7 @@ class MainWidget extends StatelessWidget {
         horizontal: AppSize.defaultSize,
         vertical: AppSize.defaultSize,
       ),
-      child: SingleChildScrollView(
+      child: const SingleChildScrollView(
         child: Column(
           children: [
             MyAppBar(),
@@ -32,4 +29,3 @@ class MainWidget extends StatelessWidget {
     );
   }
 }
-

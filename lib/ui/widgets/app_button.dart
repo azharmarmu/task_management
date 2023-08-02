@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../utilities/app_color.dart';
 import '../../utilities/app_size.dart';
 
+// ignore: must_be_immutable
 class AppButton extends StatelessWidget {
   final double width;
   final Function() onPressed;
@@ -17,7 +18,7 @@ class AppButton extends StatelessWidget {
     this.color = AppColors.primaryColor,
     required this.label,
   }) {
-    this.icon = null;
+    icon = null;
   }
 
   AppButton.icon({

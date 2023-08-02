@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:task_management/utilities/app_color.dart';
 import 'package:task_management/utilities/app_size.dart';
 
@@ -30,7 +29,7 @@ class StorageWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: AppSize.defaultSize * 1.5),
-          ChartWidget(),
+          const ChartWidget(),
           const SizedBox(height: AppSize.defaultSize * 1.5),
           ...storageFileList
               .map(

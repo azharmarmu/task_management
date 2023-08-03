@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_management/responsive.dart';
 
 import '../../utilities/app_size.dart';
 import 'my_files_widget.dart';
@@ -12,15 +13,17 @@ class BodySection extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
+        const Expanded(
           flex: 5,
           child: MyFilesWidget(),
         ),
-        const SizedBox(width: AppSize.defaultSize),
-        Expanded(
-          flex: 2,
-          child: StorageWidget(),
-        )
+        if (!Responsive.isMobile(context))
+          const SizedBox(width: AppSize.defaultSize),
+        if (!Responsive.isMobile(context))
+          const Expanded(
+            flex: 2,
+            child: StorageWidget(),
+          )
       ],
     );
   }

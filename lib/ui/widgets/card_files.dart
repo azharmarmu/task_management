@@ -3,26 +3,37 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_management/utilities/app_color.dart';
 
 import '../../models/cloud_storage_info.dart';
+import '../../responsive.dart';
 import '../../utilities/app_assets.dart';
 import '../../utilities/app_size.dart';
 import 'my_progress_indicator.dart';
 
 class CardFiles extends StatelessWidget {
+  final int crossAxisCount;
+  final double crossAxisSpacing;
+  final double mainAxisSpacing;
   const CardFiles({
     super.key,
+    required this.crossAxisCount,
+    this.crossAxisSpacing = AppSize.defaultSize / 2,
+    this.mainAxisSpacing = 0.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       itemCount: demoMyFiles.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        crossAxisSpacing: AppSize.defaultSize / 2,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        crossAxisSpacing: crossAxisSpacing,
+        mainAxisSpacing: mainAxisSpacing,
       ),
-      itemBuilder: (_, int index) => _FileCard(demoMyFiles[index]),
+      itemBuilder: (_, int index) => _FileCard(
+        demoMyFiles[index],
+      ),
     );
   }
 }

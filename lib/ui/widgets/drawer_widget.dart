@@ -22,6 +22,7 @@ class DrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
+      width: MediaQuery.of(context).size.width / 2,
       color: AppColors.secondaryColor,
       child: SingleChildScrollView(
         child: Column(
@@ -43,7 +44,7 @@ class DrawerWidget extends StatelessWidget {
                       ),
                     ))
                 .toList()
-      
+
             // add list in between a list
             // ...[
             //   ListTile(
@@ -62,7 +63,7 @@ class DrawerWidget extends StatelessWidget {
           ],
           //add list at last of list
           // ..addAll([
-      
+
           // ]),
         ),
       ),

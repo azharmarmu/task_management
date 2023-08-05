@@ -7,7 +7,7 @@ import '../../utilities/app_size.dart';
 
 class StorageTile extends StatelessWidget {
   final StorageModel storageModel;
-  
+
   const StorageTile({
     super.key,
     required this.storageModel,
@@ -39,26 +39,28 @@ class StorageTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: AppSize.defaultSize),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                storageModel.label,
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-              const SizedBox(
-                height: AppSize.defaultSize / 4,
-              ),
-              Text(
-                '${storageModel.fileNo} Files',
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  storageModel.label,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                const SizedBox(height: AppSize.defaultSize / 4),
+                Text(
+                  '${storageModel.fileNo} Files',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ],
+            ),
           ),
-          const Spacer(),
-          Text(
-            '${storageModel.fileSize}GB',
-            style: Theme.of(context).textTheme.labelMedium,
+          Expanded(
+            child: Text(
+              '${storageModel.fileSize}GB',
+              style: Theme.of(context).textTheme.labelMedium,
+              textAlign: TextAlign.right,
+            ),
           ),
         ],
       ),

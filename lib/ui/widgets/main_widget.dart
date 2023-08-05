@@ -5,8 +5,10 @@ import 'body_section.dart';
 import 'my_app_bar.dart';
 
 class MainWidget extends StatelessWidget {
+  final Function() onPressed;
   const MainWidget({
     super.key,
+    required this.onPressed,
   });
 
   @override
@@ -17,12 +19,14 @@ class MainWidget extends StatelessWidget {
         horizontal: AppSize.defaultSize,
         vertical: AppSize.defaultSize,
       ),
-      child: const SingleChildScrollView(
+      child: SingleChildScrollView(
         child: Column(
           children: [
-            MyAppBar(),
-            SizedBox(height: AppSize.defaultSize),
-            BodySection(),
+            MyAppBar(
+              onPressed: onPressed,
+            ),
+            const SizedBox(height: AppSize.defaultSize),
+            const BodySection(),
           ],
         ),
       ),

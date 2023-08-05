@@ -18,7 +18,19 @@ class MyFilesWidget extends StatelessWidget {
       children: [
         const FilesHeader(),
         const SizedBox(height: AppSize.defaultSize),
-        const CardFiles(),
+        Responsive(
+          mobile: const CardFiles(
+            crossAxisCount: 2,
+            mainAxisSpacing: AppSize.defaultSize / 2,
+          ),
+          desktop: const CardFiles(
+            crossAxisCount: 4,
+          ),
+          tablet: CardFiles(
+            crossAxisCount: MediaQuery.of(context).size.width > 720 ? 4 : 2,
+            mainAxisSpacing: AppSize.defaultSize / 2,
+          ),
+        ),
         const SizedBox(height: AppSize.defaultSize),
         const RecentFiles(),
         if (Responsive.isMobile(context)) ...[

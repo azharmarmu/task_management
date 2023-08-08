@@ -12,11 +12,13 @@ class CardFiles extends StatelessWidget {
   final int crossAxisCount;
   final double crossAxisSpacing;
   final double mainAxisSpacing;
+  final double childAspectRatio;
   const CardFiles({
     super.key,
     required this.crossAxisCount,
     this.crossAxisSpacing = AppSize.defaultSize / 2,
     this.mainAxisSpacing = 0.0,
+    this.childAspectRatio = 1,
   });
 
   @override
@@ -30,6 +32,7 @@ class CardFiles extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: crossAxisSpacing,
         mainAxisSpacing: mainAxisSpacing,
+        childAspectRatio: childAspectRatio,
       ),
       itemBuilder: (_, int index) => _FileCard(
         demoMyFiles[index],
@@ -76,10 +79,12 @@ class _FileCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSize.defaultSize),
-          Text(
-            myFile.title,
-            style: Theme.of(context).textTheme.bodySmall,
-            overflow: TextOverflow.clip,
+          Expanded(
+            child: Text(
+              myFile.title,
+              style: Theme.of(context).textTheme.bodySmall,
+              overflow: TextOverflow.clip,
+            ),
           ),
           const SizedBox(height: AppSize.defaultSize),
           MyProgressIndicator(color: myFile.color),
@@ -87,15 +92,19 @@ class _FileCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '${myFile.numOfFiles} Files',
-                style: Theme.of(context).textTheme.labelMedium,
-                overflow: TextOverflow.ellipsis,
+              Expanded(
+                child: Text(
+                  '${myFile.numOfFiles} Files',
+                  style: Theme.of(context).textTheme.labelMedium,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              Text(
-                '${myFile.totalStorage}GB',
-                style: Theme.of(context).textTheme.labelSmall,
-                overflow: TextOverflow.ellipsis,
+              Expanded(
+                child: Text(
+                  '${myFile.totalStorage}GB',
+                  style: Theme.of(context).textTheme.labelSmall,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),

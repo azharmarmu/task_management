@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:task_management/models/recent_files.dart';
 import 'package:task_management/ui/widgets/app_button.dart';
 
+import 'popup.dart';
+
 class FilesHeader extends StatelessWidget {
+  final Function(FileModel) onTap;
+
   const FilesHeader({
+    required this.onTap,
     super.key,
   });
 
@@ -15,7 +21,23 @@ class FilesHeader extends StatelessWidget {
         AppButton.icon(
           icon: Icons.add,
           label: 'Add New',
-          onPressed: () {},
+          onPressed: () async {
+            final result = await showDialog(
+              context: context,
+              builder: (BuildContext context) => const PopupBox(),
+            );
+
+            if (result != null) {
+              onTap(
+                FileModel(
+                  id: '',
+                  name: result['name'],
+                  date: result['date'],
+                  size: double.parse('${result['size']}'),
+                ),
+              );
+            }
+          },
         )
       ],
     );

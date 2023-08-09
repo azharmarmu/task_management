@@ -8,7 +8,14 @@ import '../../utilities/app_network.dart';
 
 class RecentFiles extends StatelessWidget {
   final List<FileModel> files;
-  const RecentFiles({super.key, required this.files});
+  final Function(FileModel) deleteFile;
+  final Function(FileModel) updateFile;
+  const RecentFiles({
+    super.key,
+    required this.files,
+    required this.deleteFile,
+    required this.updateFile,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +51,22 @@ class RecentFiles extends StatelessWidget {
                         ),
                       ),
                       DataColumn(
-                        label: Text('Date',
-                            style: Theme.of(context).textTheme.bodyMedium),
+                        label: Text(
+                          'Date',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
                       ),
                       DataColumn(
-                        label: Text('Size',
-                            style: Theme.of(context).textTheme.bodyMedium),
+                        label: Text(
+                          'Size',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          '',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
                       ),
                     ],
                     rows: files
@@ -86,6 +103,47 @@ class RecentFiles extends StatelessWidget {
                               DataCell(Text('${fm.size}',
                                   style:
                                       Theme.of(context).textTheme.labelMedium)),
+                              DataCell(
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () async {
+                                        var res = await AppNetwork().delete(
+                                          '${AppNetwork.taskList}/${fm.id}',
+                                        );
+                                        deleteFile(fm);
+                                      },
+                                      icon: const Icon(Icons.delete),
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(width: AppSize.defaultSize * 2),
+                                    IconButton(
+                                      onPressed: () async {
+                                        Map<String, dynamic> fileModel =
+                                            fm.toJson();
+
+                                        fileModel['name'] = 'Personal Meeting';
+
+                                        var res = await AppNetwork().update(
+                                          '${AppNetwork.taskList}/${fm.id}',
+                                          body: fileModel,
+                                        );
+                                        if (res != null) {
+                                          FileModel _fm = FileModel(
+                                            id: fileModel['id'],
+                                            name: fileModel['name'],
+                                            date: fileModel['date'],
+                                            size: fileModel['size'],
+                                          );
+                                          updateFile(_fm);
+                                        }
+                                      },
+                                      icon: const Icon(Icons.edit),
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         )

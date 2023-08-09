@@ -5,10 +5,10 @@ import 'package:task_management/ui/widgets/app_button.dart';
 import 'popup.dart';
 
 class FilesHeader extends StatelessWidget {
-  final Function(FileModel) onTap;
+  final Function(FileModel) addFiles;
 
   const FilesHeader({
-    required this.onTap,
+    required this.addFiles,
     super.key,
   });
 
@@ -28,9 +28,9 @@ class FilesHeader extends StatelessWidget {
             );
 
             if (result != null) {
-              onTap(
+              addFiles(
                 FileModel(
-                  id: '',
+                  id: result['id'],
                   name: result['name'],
                   date: result['date'],
                   size: double.parse('${result['size']}'),

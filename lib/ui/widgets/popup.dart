@@ -61,25 +61,27 @@ class _PopupBoxState extends State<PopupBox> {
               TextButton(
                 onPressed: () async {
                   final name = nameCtrl.text;
-                  //if (name.isEmpty || name.length > 3) return;
-                  //Add to DB
-                  var url = Uri.https(AppNetwork.baseUrl, AppNetwork.taskList);
                   try {
-                    Map body = {
+                    Map<String, dynamic> body = {
                       'name': name,
                       'date': format.format(selectedDate!),
                       'size': '35',
                     };
 
-                    var response = await http.post(
-                      url,
-                      body: jsonEncode(body),
+                    var result = await AppNetwork().post(
+                      AppNetwork.taskList,
+                      body: body,
                     );
-
-                    print('Response status: ${response.statusCode}');
-                    print('Response body: ${response.body}');
-                    
-                    Navigator.of(context).pop(body);
+                    if (result != null) {
+                      body['id'] = result['name'];
+                      Navigator.of(context).pop(body);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text('Could not add the task'),
+                        ),
+                      );
+                    }
                   } catch (e) {
                     print(e);
                   }

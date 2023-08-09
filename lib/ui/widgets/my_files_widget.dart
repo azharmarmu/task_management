@@ -28,17 +28,17 @@ class _MyFilesWidgetState extends State<MyFilesWidget> {
   }
 
   Future<void> loadFiles() async {
-    Map<String, dynamic> result = await AppNetwork().get(AppNetwork.taskList);
-
-    for (var res in result.entries) {
-      files.add(FileModel(
-        id: res.key,
-        name: res.value['name'],
-        date: res.value['date'],
-        size: double.parse('${res.value['size']}'),
-      ));
+    Map<String, dynamic>? result = await AppNetwork().get(AppNetwork.taskList);
+    if (result != null) {
+      for (var res in result.entries) {
+        files.add(FileModel(
+          id: res.key,
+          name: res.value['name'],
+          date: res.value['date'],
+          size: double.parse('${res.value['size']}'),
+        ));
+      }
     }
-
     setState(() {});
   }
 
@@ -47,7 +47,7 @@ class _MyFilesWidgetState extends State<MyFilesWidget> {
     return Column(
       children: [
         FilesHeader(
-          onTap: (FileModel file) {
+          addFiles: (FileModel file) {
             files.add(file);
             setState(() {});
           },
@@ -70,7 +70,24 @@ class _MyFilesWidgetState extends State<MyFilesWidget> {
           ),
         ),
         const SizedBox(height: AppSize.defaultSize),
-        RecentFiles(files: files),
+        RecentFiles(
+          files: files,
+          deleteFile: (FileModel fm) {
+            files.remove(fm);
+            setState(() {});
+          },
+          updateFile: (FileModel newFileModel) {
+            for (var oldFileModel in files) {
+              if (oldFileModel.id == newFileModel.id) {
+                int index = files.indexOf(oldFileModel);
+                files.removeAt(index);
+                files.add(newFileModel);
+                break;
+              }
+            }
+            setState(() {});
+          },
+        ),
         if (Responsive.isMobile(context)) ...[
           const SizedBox(height: AppSize.defaultSize),
           const StorageWidget(),
